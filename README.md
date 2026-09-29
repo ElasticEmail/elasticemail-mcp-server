@@ -65,6 +65,9 @@ The build restores its NuGet dependencies ([ModelContextProtocol.AspNetCore](htt
 
 ## Quick start
 
+> [!IMPORTANT]
+> Elastic Email only sends from verified domains. Before your first send, [verify your sending domain](https://help.elasticemail.com/en/articles/4934400-how-to-verify-your-domain) and use an address on that domain as the sender.
+
 ### Run the server
 
 ```bash
@@ -137,7 +140,7 @@ Ask your assistant something like:
 - "Create a list called *beta-testers* with jane@example.com and john@example.com."
 - "Show me open and click statistics for all my campaigns."
 
-The `from` address must use a domain you've verified in your Elastic Email account. If you leave it out, the server uses your account's default sender.
+The `from` address must use a domain you've [verified in your Elastic Email account](https://help.elasticemail.com/en/articles/4934400-how-to-verify-your-domain). If you leave it out, the server uses your account's default sender.
 
 ## More examples
 
