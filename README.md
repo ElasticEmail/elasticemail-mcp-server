@@ -165,8 +165,9 @@ Requests without the header, or with a key the API rejects, get `401 Unauthorize
 
 The server calls the Elastic Email API v4 with your key, so the API's limits apply:
 
-- Up to **20 concurrent connections** per account
-- A hard timeout of **600 seconds** per request
+- Up to **20 concurrent connections** per account. The API doesn't return `429`; a `5xx` under load means slow down and retry with backoff
+- A request with no response for about **50 seconds** fails with a gateway error (`5xx`)
+- Up to **50 recipients** per `POST /emails/transactional` and **1000 contacts or suppressions** per upload (`413` above that)
 
 ## Tools
 
