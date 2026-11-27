@@ -19,6 +19,7 @@ The official [Model Context Protocol](https://modelcontextprotocol.io) server fo
 [![Open issues](https://img.shields.io/github/issues/ElasticEmail/elasticemail-mcp-server?logo=github)](https://github.com/ElasticEmail/elasticemail-mcp-server/issues)
 [![GitHub stars](https://img.shields.io/github/stars/ElasticEmail/elasticemail-mcp-server?style=flat&logo=github)](https://github.com/ElasticEmail/elasticemail-mcp-server/stargazers)
 
+[Hosted server](#hosted-server) •
 [Installation](#installation) •
 [Quick start](#quick-start) •
 [Tools](#tools) •
@@ -39,8 +40,28 @@ The official [Model Context Protocol](https://modelcontextprotocol.io) server fo
 - **Works with any MCP client.** VS Code (GitHub Copilot agent mode), Cursor, Claude Code and other clients that speak MCP over HTTP.
 - **Per-request authentication.** Each client sends its own Elastic Email API key. The server keeps no credentials of its own.
 
-> [!TIP]
-> Don't want to run a server? Elastic Email hosts this server at **`https://mcp.elasticemail.com`**. See the [hosted MCP guide](https://help.elasticemail.com/en/articles/12595879-elastic-email-mcp). This repository is for running it yourself.
+## Hosted server
+
+You don't have to run anything yourself. Elastic Email hosts this server at **`https://mcp.elasticemail.com`** (Streamable HTTP). It's listed in the [official MCP Registry](https://registry.modelcontextprotocol.io/v0/servers?search=com.elasticemail) as `com.elasticemail/mcp`.
+
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_server-0098FF?logo=visualstudiocode&logoColor=white)](https://vscode.dev/redirect/mcp/install?name=elasticemail&config=%7B%22type%22%3A%22http%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.elasticemail.com%22%7D)
+[![Install in Cursor](https://img.shields.io/badge/Cursor-Install_server-000000?logo=cursor&logoColor=white)](https://cursor.com/en/install-mcp?name=elasticemail&config=eyJ1cmwiOiJodHRwczovL21jcC5lbGFzdGljZW1haWwuY29tIn0=)
+
+There are two ways to sign in:
+
+- **OAuth (recommended).** Add the URL with no headers. Your client opens an Elastic Email sign-in page through `oidc.elasticemail.com` the first time it connects. The install buttons above use this.
+- **API key.** Send your key in the `X-Auth-Token` header. See [Requirements](#requirements) for the permissions it needs.
+
+| Client | OAuth | API key |
+| --- | --- | --- |
+| **VS Code** (`.vscode/mcp.json`) | `"elasticemail": { "type": "http", "url": "https://mcp.elasticemail.com" }` | Add `"headers": { "X-Auth-Token": "${input:elasticemail-api-key}" }` |
+| **Cursor** (`~/.cursor/mcp.json`) | `"elasticemail": { "url": "https://mcp.elasticemail.com" }` | Add `"headers": { "X-Auth-Token": "YOUR_API_KEY" }` |
+| **Claude Code** | `claude mcp add --transport http elasticemail https://mcp.elasticemail.com`, then run `/mcp` to sign in | Append `--header "X-Auth-Token: $ELASTICEMAIL_API_KEY"` |
+| **Claude** (claude.ai / desktop) | **Settings > Connectors > Add custom connector**, URL `https://mcp.elasticemail.com`. See the [Claude guide](https://help.elasticemail.com/en/articles/17451500-how-to-connect-the-elastic-email-mcp-server-to-claude). | Not needed |
+
+More detail: [hosted MCP guide](https://help.elasticemail.com/en/articles/12595879-elastic-email-mcp).
+
+The rest of this README is about running the server yourself.
 
 ## Requirements
 
@@ -158,6 +179,8 @@ More complete, runnable samples are in the **[Elastic Email examples repository]
 | `X-Auth-Token` | Your MCP client, on every request | Your Elastic Email API key. The server checks it against `GET /v4/security/apikeys` and forwards it on every API call. |
 
 Requests without the header, or with a key the API rejects, get `401 Unauthorized`.
+
+This repository supports API keys only. OAuth sign-in is available on the [hosted server](#hosted-server).
 
 > [!IMPORTANT]
 > The server speaks plain HTTP, so the API key travels unencrypted. Keep it on `localhost` or a private network. If you expose it, put it behind a reverse proxy that terminates TLS.
