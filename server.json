@@ -3,7 +3,7 @@
   "name": "com.elasticemail/mcp",
   "title": "Elastic Email MCP Server",
   "description": "Send emails and manage contacts, lists, segments, templates and campaigns in Elastic Email.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://elasticemail.com/email-marketing-mcp",
   "repository": {
     "url": "https://github.com/ElasticEmail/elasticemail-mcp-server",
@@ -24,8 +24,8 @@
       "headers": [
         {
           "name": "X-Auth-Token",
-          "description": "Your Elastic Email API key (Settings > Manage API Keys).",
-          "isRequired": true,
+          "description": "Your Elastic Email API key (Settings > Manage API Keys). Leave empty to sign in with OAuth instead.",
+          "isRequired": false,
           "isSecret": true
         }
       ]
