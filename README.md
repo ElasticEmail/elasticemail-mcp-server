@@ -11,6 +11,7 @@ The official [Model Context Protocol](https://modelcontextprotocol.io) server fo
 [![Tools](https://img.shields.io/badge/tools-26-0A7BBB)](#tools)
 [![API](https://img.shields.io/badge/API-v4-0A7BBB)](https://elasticemail.com/developers/api-documentation/rest-api)
 [![Hosted](https://img.shields.io/badge/hosted-mcp.elasticemail.com-0A7BBB)](https://help.elasticemail.com/en/articles/12595879-elastic-email-mcp)
+[![mcptry](https://mcptry.com/badge/com.elasticemail/mcp)](https://mcptry.com/servers/com.elasticemail/mcp)
 [![License: MIT](https://img.shields.io/github/license/ElasticEmail/elasticemail-mcp-server?color=yellow)](LICENSE)
 
 [![Latest release](https://img.shields.io/github/v/release/ElasticEmail/elasticemail-mcp-server?logo=github&label=release)](https://github.com/ElasticEmail/elasticemail-mcp-server/releases)
